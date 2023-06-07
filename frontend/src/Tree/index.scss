@@ -1,0 +1,31 @@
+.d-tree-container {
+	list-style: none;
+	padding: 0;
+}
+
+.d-tree-node {
+	// padding: 0.75rem 1.25rem;
+}
+
+.d-tree-toggler {
+	width: max-content;
+	margin: 0rem 4px;
+	transition: transform 200ms;
+	&:hover {
+		background-color: lightgrey;
+	}
+}
+
+.d-tree-toggler.active {
+	transform: rotate(90deg);
+}
+
+.d-tree-head {
+	width: 100%;
+	padding: 0.75rem 1.25rem;
+	border-radius: 0.5rem;
+	transition: background-color 200ms;
+	&:hover {
+		background-color: lightgrey;
+	}
+}
