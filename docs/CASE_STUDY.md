@@ -17,3 +17,9 @@ The backend is included in this repository; the standalone backend is an older s
 ## Evidence to capture
 
 Use a real locally running build and synthetic information. Show one entry screen, the main workflow, and a resulting state. Historical screenshots must remain labeled as historical. Do not invent usage, performance, revenue, or deployment claims.
+
+## Connected criteria demonstration
+
+The optional portfolio mode uses the existing Node/Mongoose criteria endpoints with a dedicated synthetic database. It supplies a small React interface for creating, reading, and deleting criteria independently of institutional credentials. Legacy archive execution is disabled by default.
+
+![Actual local criteria demonstration](screenshots/criteria-demo.png)
