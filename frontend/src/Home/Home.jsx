@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../api-config';
 import { render } from '@testing-library/react';
 import React, { useEffect, useState, useRef } from 'react';
 import {
@@ -196,7 +197,7 @@ function Home() {
 														setHandleCourse(arr);
 													}
 													fetch(
-														'http://localhost:4000/details/',
+														`${API_BASE_URL}/details/`,
 														requestOptions1
 													)
 														.then((response) => response.json())
@@ -259,7 +260,7 @@ function Home() {
 				Authorization: 'Bearer ' + sessionStorage.getItem('token'),
 			},
 		};
-		fetch('http://localhost:4000/corrects/', requestOptions1)
+		fetch(`${API_BASE_URL}/corrects/`, requestOptions1)
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data);
@@ -845,7 +846,7 @@ function Home() {
 																onClick={() => {
 																	axios
 																		.delete(
-																			'http://localhost:4000/details/delete/' +
+																			`${API_BASE_URL}/details/delete/` +
 																				item.course.id +
 																				'/' +
 																				item.type

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../../api-config';
 import axios from 'axios';
 import { Component, useEffect, useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
@@ -50,7 +51,7 @@ function CreateColumnDetails(props) {
 		console.log(obj);
 
 		axios
-			.post('http://localhost:4000/details/add', obj)
+			.post(`${API_BASE_URL}/details/add`, obj)
 			.then((res) => console.log(res.data));
 
 		// this.setState({

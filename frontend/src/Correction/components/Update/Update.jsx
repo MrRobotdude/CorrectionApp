@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../../api-config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card, Form } from 'react-bootstrap';
@@ -19,7 +20,7 @@ function Update() {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/details/' + id)
+			.get(`${API_BASE_URL}/details/` + id)
 			.then((res) => console.log(res.data));
 	}, []);
 

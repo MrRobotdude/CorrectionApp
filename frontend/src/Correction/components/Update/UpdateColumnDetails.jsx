@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../../api-config';
 import axios from 'axios';
 import { Component, useEffect, useState } from 'react';
 import { Button, Card, Form, Modal } from 'react-bootstrap';
@@ -13,7 +14,7 @@ function UpdateColumnDetails(props) {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/details/' + props.detailsId)
+			.get(`${API_BASE_URL}/details/` + props.detailsId)
 			.then((res) => setInputList(res.data));
 		setCourse(props.Course);
 		console.log(props.detailsId);
@@ -37,7 +38,7 @@ function UpdateColumnDetails(props) {
 		console.log(obj);
 
 		axios
-			.post('http://localhost:4000/details/update/' + props.detailsId, obj)
+			.post(`${API_BASE_URL}/details/update/` + props.detailsId, obj)
 			.then((res) => console.log(res.data));
 
 		setModalShow(true);

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../../api-config';
 import axios from 'axios';
 import { Component, useEffect, useState } from 'react';
 import {
@@ -22,7 +23,7 @@ const Details = (props) => (
 				type='Submit'
 				onClick={() => {
 					axios
-						.delete('http://localhost:4000/details/delete/' + props.data._id)
+						.delete(`${API_BASE_URL}/details/delete/` + props.data._id)
 						.then((res) => {
 							console.log('Details successfully deleted!');
 							window.location.reload();
@@ -44,7 +45,7 @@ function CorrectionPage() {
 	useEffect(() => {
 		console.log('tes');
 		axios
-			.get('http://localhost:4000/details/')
+			.get(`${API_BASE_URL}/details/`)
 			.then((res) => {
 				setInputList(res.data);
 				console.log(res.data);

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../../../api-config';
 import axios from 'axios';
 import { Component, useEffect, useState } from 'react';
 import { Button, Carousel, Col, Container, Row } from 'react-bootstrap';
@@ -40,7 +41,7 @@ function CorrectionScore(props) {
 
 	function checkExist() {
 		axios
-			.get('http://localhost:4000/details/')
+			.get(`${API_BASE_URL}/details/`)
 			.then((res) => {
 				setInputList(res.data);
 				console.log(res.data);
@@ -56,7 +57,7 @@ function CorrectionScore(props) {
 			},
 		};
 		fetch(
-			'http://localhost:4000/corrects/' +
+			`${API_BASE_URL}/corrects/` +
 				course +
 				'/' +
 				type +
@@ -71,7 +72,7 @@ function CorrectionScore(props) {
 			.then((data) => {
 				console.log(data);
 				console.log(
-					'http://localhost:4000/corrects/' +
+					`${API_BASE_URL}/corrects/` +
 						course +
 						'/' +
 						type +
@@ -99,7 +100,7 @@ function CorrectionScore(props) {
 	function changeStatus(status) {
 		axios
 			.post(
-				'http://localhost:4000/corrects/change-status/' +
+				`${API_BASE_URL}/corrects/change-status/` +
 					props.correctionData.courseId +
 					'/' +
 					props.correctionData.class +
@@ -139,7 +140,7 @@ function CorrectionScore(props) {
 		if (!ex) {
 			console.log('insert');
 			axios
-				.post('http://localhost:4000/corrects/create', props.correctionData)
+				.post(`${API_BASE_URL}/corrects/create`, props.correctionData)
 				.then((res) => console.log(res.data));
 		} else {
 			console.log('update');
@@ -151,7 +152,7 @@ function CorrectionScore(props) {
 				);
 				axios
 					.post(
-						'http://localhost:4000/corrects/update-correction/' +
+						`${API_BASE_URL}/corrects/update-correction/` +
 							props.correctionData.courseId +
 							'/' +
 							props.correctionData.class +
@@ -166,7 +167,7 @@ function CorrectionScore(props) {
 				console.log('ada update', props.index);
 				axios
 					.post(
-						'http://localhost:4000/corrects/update-correction/' +
+						`${API_BASE_URL}/corrects/update-correction/` +
 							props.correctionData.courseId +
 							'/' +
 							props.correctionData.class +
@@ -203,7 +204,7 @@ function CorrectionScore(props) {
 			}
 			axios
 				.post(
-					'http://localhost:4000/corrects/update-correction/' +
+					`${API_BASE_URL}/corrects/update-correction/` +
 						props.correctionData.courseId +
 						'/' +
 						props.correctionData.class +

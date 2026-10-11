@@ -7,16 +7,17 @@ import Corrections from './corrections.model.js';
 import CorrectionController from './api/correction.controller.js';
 
 const app = express();
-const PORT = 4000;
+const PORT = Number(process.env.PORT || 4000);
 const detailsRoutes = express.Router();
 const correctionRoutes = express.Router();
 
-app.use(cors());
+app.use(cors({origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000'}));
+app.get('/health', (req,res) => res.json({status:'ok',database:mongoose.connection.readyState === 1 ? 'connected' : 'unavailable'}));
 app.use(bodyParser.json());
 
 app.use('/corrects', correctionRoutes);
 
-mongoose.connect('mongodb://127.0.0.1:27017/details', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/correction_portfolio_demo', {
 	useNewUrlParser: true,
 });
 const connection = mongoose.connection;
