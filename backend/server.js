@@ -13,7 +13,7 @@ const correctionRoutes = express.Router();
 
 app.use(cors({origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000'}));
 app.get('/health', (req,res) => res.json({status:'ok',database:mongoose.connection.readyState === 1 ? 'connected' : 'unavailable'}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'1mb'}));
 
 app.use('/corrects', correctionRoutes);
 
@@ -272,7 +272,7 @@ app.use('/details', detailsRoutes);
 
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
-app.listen(PORT, function () {
+app.listen(PORT, '127.0.0.1', function () {
 	console.log('Server is running on Port: ' + PORT);
 });
 
