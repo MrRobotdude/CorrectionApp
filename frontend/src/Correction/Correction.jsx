@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../api-config';
 import React, { useEffect, useState, useContext } from 'react';
 import './Correction.scss';
 import { useParams } from 'react-router-dom';
@@ -124,7 +125,7 @@ const Correction = () => {
 			},
 		};
 		fetch(
-			'http://localhost:4000/details/' + course + '/' + type,
+			`${API_BASE_URL}/details/` + course + '/' + type,
 			requestOptions
 		)
 			.then((response) => response.json())
@@ -132,7 +133,7 @@ const Correction = () => {
 				console.log(d);
 				setTemplateData(d);
 				fetch(
-					'http://localhost:4000/corrects/' +
+					`${API_BASE_URL}/corrects/` +
 						course +
 						'/' +
 						type +
@@ -147,7 +148,7 @@ const Correction = () => {
 					.then((data) => {
 						console.log(data);
 						console.log(
-							'http://localhost:4000/corrects/' +
+							`${API_BASE_URL}/corrects/` +
 								course +
 								'/' +
 								type +

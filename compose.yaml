@@ -1,0 +1,9 @@
+services:
+  mongo:
+    image: mongo:8.0
+    ports:
+      - "127.0.0.1:27019:27017"
+    volumes:
+      - correction-demo:/data/db
+volumes:
+  correction-demo:

@@ -1,0 +1,21 @@
+
+# Local preparation and generated files
+.env
+.env.local
+.env.development.local
+.env.production.local
+**/node_modules/
+**/vendor/
+**/bin/
+**/obj/
+**/.gradle/
+**/appsettings.Local.json
+*.bak
+*.mdf
+*.ldf
+portfolio-logs/
+
+*.jks
+*.pfx
+**/packages/
+backend/temp_tree/

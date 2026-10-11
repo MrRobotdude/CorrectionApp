@@ -7,16 +7,24 @@ import Corrections from './corrections.model.js';
 import CorrectionController from './api/correction.controller.js';
 
 const app = express();
-const PORT = 4000;
+const PORT = Number(process.env.PORT || 4000);
 const detailsRoutes = express.Router();
 const correctionRoutes = express.Router();
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors({origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000'}));
+app.get('/health', (req,res) => res.json({status:'ok',database:mongoose.connection.readyState === 1 ? 'connected' : 'unavailable'}));
+app.use(bodyParser.json({limit:'1mb'}));
+
+// File execution and filesystem access are opt-in for a trusted local environment.
+app.use((req, res, next) => {
+ const fileTool = ['/testing', '/extract', '/delete-directory', '/directory-list', '/read-file'].some(path => req.path === path || req.path.startsWith(path + '/'));
+ if (fileTool && process.env.ENABLE_TRUSTED_FILE_TOOLS !== 'true') return res.status(403).json({error:'Legacy file tools are disabled. Use only trusted inputs in an isolated environment.'});
+ next();
+});
 
 app.use('/corrects', correctionRoutes);
 
-mongoose.connect('mongodb://127.0.0.1:27017/details', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/correction_portfolio_demo', {
 	useNewUrlParser: true,
 });
 const connection = mongoose.connection;
@@ -271,7 +279,7 @@ app.use('/details', detailsRoutes);
 
 app.use('*', (req, res) => res.status(404).json({ error: 'not found' }));
 
-app.listen(PORT, function () {
+app.listen(PORT, '127.0.0.1', function () {
 	console.log('Server is running on Port: ' + PORT);
 });
 
