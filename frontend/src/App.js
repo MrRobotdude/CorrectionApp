@@ -1,4 +1,5 @@
 import './App.css';
+import PortfolioDemo from './PortfolioDemo';
 import Login from './Login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home/Home';
@@ -8,6 +9,7 @@ import Update from './Correction/components/Update/Update';
 import CorrectionPage from './Correction/components/CorrectionPage/CorrectionPage';
 
 function App() {
+ if (process.env.REACT_APP_PORTFOLIO_DEMO === 'true') return <PortfolioDemo />;
 	return (
 		<Router>
 			<Routes>

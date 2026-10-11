@@ -14,3 +14,8 @@
 *.mdf
 *.ldf
 portfolio-logs/
+
+*.jks
+*.pfx
+**/packages/
+backend/temp_tree/

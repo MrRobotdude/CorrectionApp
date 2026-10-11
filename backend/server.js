@@ -15,6 +15,13 @@ app.use(cors({origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000'}));
 app.get('/health', (req,res) => res.json({status:'ok',database:mongoose.connection.readyState === 1 ? 'connected' : 'unavailable'}));
 app.use(bodyParser.json({limit:'1mb'}));
 
+// File execution and filesystem access are opt-in for a trusted local environment.
+app.use((req, res, next) => {
+ const fileTool = ['/testing', '/extract', '/delete-directory', '/directory-list', '/read-file'].some(path => req.path === path || req.path.startsWith(path + '/'));
+ if (fileTool && process.env.ENABLE_TRUSTED_FILE_TOOLS !== 'true') return res.status(403).json({error:'Legacy file tools are disabled. Use only trusted inputs in an isolated environment.'});
+ next();
+});
+
 app.use('/corrects', correctionRoutes);
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/correction_portfolio_demo', {
